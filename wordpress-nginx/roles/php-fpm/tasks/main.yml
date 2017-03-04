@@ -2,13 +2,28 @@
 - name: Install php7.0-fpm and deps
   apt: name={{ item }} state=present
   with_items:
+#    - php7.0
+#    - php7.0-fpm
+#    - php7.0-mysql
     - php7.0
     - php7.0-fpm
-    - php7.0-mysql
+    - php7.0-enchant
 
-#- name: Disable default pool
-#  command: mv /etc/php/7.0/fpm/pool.d/www.conf /etc/php/7.0/fpm/www.disabled creates=/etc/php-fpm.d/www.disabled
-#  notify: restart php7.0-fpm
+
+
+    - php7.0-gd
+    - php-ssh2
+#    - php7.0-IDNA_Convert
+    - php7.0-mbstring
+    - php7.0-mysql
+#    - php7.0-PHPMailer
+#    - php7.0-process
+#    - php7.0-simplepie
+    - php7.0-xml
+
+- name: Disable default pool
+  command: mv /etc/php/7.0/fpm/pool.d/www.conf /etc/php/7.0/fpm/pool.d/www.disabled creates=/etc/php/7.0/fpm/pool.d/www.disabled
+  notify: restart php7.0-fpm
 
 - name: Copy php7.0-fpm configuration
   template: src=wordpress.conf dest=/etc/php/7.0/fpm/
