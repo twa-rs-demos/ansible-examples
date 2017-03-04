@@ -30,5 +30,5 @@
 - name: Change ownership of WordPress installation
   file: path=/srv/wordpress/ owner=wordpress group=wordpress state=directory recurse=yes setype=httpd_sys_content_t
 
-- name: Start php-fpm Service
-  service: name=php-fpm state=started enabled=yes
+- name: Start php-fpm7.0 Service
+  service: name=php7.0-fpm state=started enabled=yes

@@ -3,13 +3,17 @@
   apt: name={{ item }} state=present
   with_items:
    - mysql-server
+   - build-essential
+   - python-dev
+   - libmysqlclient-dev
+   - python-mysqldb
 #   - MySQL-python
 #   - libselinux-python
 #   - libsemanage-python
 
-- name: Configure SELinux to start mysql on any port
-  seboolean: name=mysql_connect_any state=true persistent=yes
-  when: ansible_selinux.status == "enabled"
+#- name: Configure SELinux to start mysql on any port
+#  seboolean: name=mysql_connect_any state=true persistent=yes
+#  when: ansible_selinux.status == "enabled"
 
 - name: Create Mysql configuration file
   template: src=my.cnf.j2 dest=/etc/my.cnf
@@ -17,4 +21,4 @@
   - restart mysql
 
 - name: Start Mysql Service
-  service: name=mysqld state=started enabled=yes
+  service: name=mysql state=started enabled=yes
